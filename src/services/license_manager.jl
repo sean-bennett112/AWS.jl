@@ -5,6 +5,127 @@ using AWS.Compat
 using AWS.UUIDs
 
 """
+    AcceptGrant()
+
+Accepts the specified grant.
+
+# Required Parameters
+- `GrantArn`: Amazon Resource Name (ARN) of the grant.
+
+"""
+accept_grant(GrantArn; aws_config::AWSConfig=global_aws_config()) = license_manager("AcceptGrant", Dict{String, Any}("GrantArn"=>GrantArn); aws_config=aws_config)
+accept_grant(GrantArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("AcceptGrant", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("GrantArn"=>GrantArn), args)); aws_config=aws_config)
+
+"""
+    CheckInLicense()
+
+Checks in the specified license. Check in a license when it is no longer in use.
+
+# Required Parameters
+- `LicenseConsumptionToken`: License consumption token.
+
+# Optional Parameters
+- `Beneficiary`: License beneficiary.
+"""
+check_in_license(LicenseConsumptionToken; aws_config::AWSConfig=global_aws_config()) = license_manager("CheckInLicense", Dict{String, Any}("LicenseConsumptionToken"=>LicenseConsumptionToken); aws_config=aws_config)
+check_in_license(LicenseConsumptionToken, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CheckInLicense", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseConsumptionToken"=>LicenseConsumptionToken), args)); aws_config=aws_config)
+
+"""
+    CheckoutBorrowLicense()
+
+Checks out the specified license for offline use.
+
+# Required Parameters
+- `ClientToken`: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+- `DigitalSignatureMethod`: Digital signature method. The possible value is JSON Web Signature (JWS) algorithm PS384. For more information, see RFC 7518 Digital Signature with RSASSA-PSS.
+- `Entitlements`: License entitlements. Partial checkouts are not supported.
+- `LicenseArn`: Amazon Resource Name (ARN) of the license. The license must use the borrow consumption configuration.
+
+# Optional Parameters
+- `CheckoutMetadata`: Information about constraints.
+- `NodeId`: Node ID.
+"""
+checkout_borrow_license(ClientToken, DigitalSignatureMethod, Entitlements, LicenseArn; aws_config::AWSConfig=global_aws_config()) = license_manager("CheckoutBorrowLicense", Dict{String, Any}("ClientToken"=>ClientToken, "DigitalSignatureMethod"=>DigitalSignatureMethod, "Entitlements"=>Entitlements, "LicenseArn"=>LicenseArn); aws_config=aws_config)
+checkout_borrow_license(ClientToken, DigitalSignatureMethod, Entitlements, LicenseArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CheckoutBorrowLicense", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("ClientToken"=>ClientToken, "DigitalSignatureMethod"=>DigitalSignatureMethod, "Entitlements"=>Entitlements, "LicenseArn"=>LicenseArn), args)); aws_config=aws_config)
+
+"""
+    CheckoutLicense()
+
+Checks out the specified license.
+
+# Required Parameters
+- `CheckoutType`: Checkout type.
+- `ClientToken`: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+- `Entitlements`: License entitlements.
+- `KeyFingerprint`: Key fingerprint identifying the license.
+- `ProductSKU`: Product SKU.
+
+# Optional Parameters
+- `Beneficiary`: License beneficiary.
+- `NodeId`: Node ID.
+"""
+checkout_license(CheckoutType, ClientToken, Entitlements, KeyFingerprint, ProductSKU; aws_config::AWSConfig=global_aws_config()) = license_manager("CheckoutLicense", Dict{String, Any}("CheckoutType"=>CheckoutType, "ClientToken"=>ClientToken, "Entitlements"=>Entitlements, "KeyFingerprint"=>KeyFingerprint, "ProductSKU"=>ProductSKU); aws_config=aws_config)
+checkout_license(CheckoutType, ClientToken, Entitlements, KeyFingerprint, ProductSKU, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CheckoutLicense", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("CheckoutType"=>CheckoutType, "ClientToken"=>ClientToken, "Entitlements"=>Entitlements, "KeyFingerprint"=>KeyFingerprint, "ProductSKU"=>ProductSKU), args)); aws_config=aws_config)
+
+"""
+    CreateGrant()
+
+Creates a grant for the specified license. A grant shares the use of license entitlements with specific AWS accounts.
+
+# Required Parameters
+- `AllowedOperations`: Allowed operations for the grant.
+- `ClientToken`: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+- `GrantName`: Grant name.
+- `HomeRegion`: Home Region of the grant.
+- `LicenseArn`: Amazon Resource Name (ARN) of the license.
+- `Principals`: The grant principals.
+
+"""
+create_grant(AllowedOperations, ClientToken, GrantName, HomeRegion, LicenseArn, Principals; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateGrant", Dict{String, Any}("AllowedOperations"=>AllowedOperations, "ClientToken"=>ClientToken, "GrantName"=>GrantName, "HomeRegion"=>HomeRegion, "LicenseArn"=>LicenseArn, "Principals"=>Principals); aws_config=aws_config)
+create_grant(AllowedOperations, ClientToken, GrantName, HomeRegion, LicenseArn, Principals, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateGrant", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("AllowedOperations"=>AllowedOperations, "ClientToken"=>ClientToken, "GrantName"=>GrantName, "HomeRegion"=>HomeRegion, "LicenseArn"=>LicenseArn, "Principals"=>Principals), args)); aws_config=aws_config)
+
+"""
+    CreateGrantVersion()
+
+Creates a new version of the specified grant.
+
+# Required Parameters
+- `ClientToken`: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+- `GrantArn`: Amazon Resource Name (ARN) of the grant.
+
+# Optional Parameters
+- `AllowedOperations`: Allowed operations for the grant.
+- `GrantName`: Grant name.
+- `SourceVersion`: Current version of the grant.
+- `Status`: Grant status.
+"""
+create_grant_version(ClientToken, GrantArn; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateGrantVersion", Dict{String, Any}("ClientToken"=>ClientToken, "GrantArn"=>GrantArn); aws_config=aws_config)
+create_grant_version(ClientToken, GrantArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateGrantVersion", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("ClientToken"=>ClientToken, "GrantArn"=>GrantArn), args)); aws_config=aws_config)
+
+"""
+    CreateLicense()
+
+Creates a license.
+
+# Required Parameters
+- `Beneficiary`: License beneficiary.
+- `ClientToken`: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+- `ConsumptionConfiguration`: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+- `Entitlements`: License entitlements.
+- `HomeRegion`: Home Region for the license.
+- `Issuer`: License issuer.
+- `LicenseName`: License name.
+- `ProductName`: Product name.
+- `ProductSKU`: Product SKU.
+- `Validity`: Date and time range during which the license is valid, in ISO8601-UTC format.
+
+# Optional Parameters
+- `LicenseMetadata`: Information about the license.
+"""
+create_license(Beneficiary, ClientToken, ConsumptionConfiguration, Entitlements, HomeRegion, Issuer, LicenseName, ProductName, ProductSKU, Validity; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateLicense", Dict{String, Any}("Beneficiary"=>Beneficiary, "ClientToken"=>ClientToken, "ConsumptionConfiguration"=>ConsumptionConfiguration, "Entitlements"=>Entitlements, "HomeRegion"=>HomeRegion, "Issuer"=>Issuer, "LicenseName"=>LicenseName, "ProductName"=>ProductName, "ProductSKU"=>ProductSKU, "Validity"=>Validity); aws_config=aws_config)
+create_license(Beneficiary, ClientToken, ConsumptionConfiguration, Entitlements, HomeRegion, Issuer, LicenseName, ProductName, ProductSKU, Validity, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateLicense", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("Beneficiary"=>Beneficiary, "ClientToken"=>ClientToken, "ConsumptionConfiguration"=>ConsumptionConfiguration, "Entitlements"=>Entitlements, "HomeRegion"=>HomeRegion, "Issuer"=>Issuer, "LicenseName"=>LicenseName, "ProductName"=>ProductName, "ProductSKU"=>ProductSKU, "Validity"=>Validity), args)); aws_config=aws_config)
+
+"""
     CreateLicenseConfiguration()
 
 Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.
@@ -25,6 +146,73 @@ create_license_configuration(LicenseCountingType, Name; aws_config::AWSConfig=gl
 create_license_configuration(LicenseCountingType, Name, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateLicenseConfiguration", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseCountingType"=>LicenseCountingType, "Name"=>Name), args)); aws_config=aws_config)
 
 """
+    CreateLicenseVersion()
+
+Creates a new version of the specified license.
+
+# Required Parameters
+- `ClientToken`: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+- `ConsumptionConfiguration`: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+- `Entitlements`: License entitlements.
+- `HomeRegion`: Home Region of the license.
+- `Issuer`: License issuer.
+- `LicenseArn`: Amazon Resource Name (ARN) of the license.
+- `LicenseName`: License name.
+- `ProductName`: Product name.
+- `Status`: License status.
+- `Validity`: Date and time range during which the license is valid, in ISO8601-UTC format.
+
+# Optional Parameters
+- `LicenseMetadata`: Information about the license.
+- `SourceVersion`: Current version of the license.
+"""
+create_license_version(ClientToken, ConsumptionConfiguration, Entitlements, HomeRegion, Issuer, LicenseArn, LicenseName, ProductName, Status, Validity; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateLicenseVersion", Dict{String, Any}("ClientToken"=>ClientToken, "ConsumptionConfiguration"=>ConsumptionConfiguration, "Entitlements"=>Entitlements, "HomeRegion"=>HomeRegion, "Issuer"=>Issuer, "LicenseArn"=>LicenseArn, "LicenseName"=>LicenseName, "ProductName"=>ProductName, "Status"=>Status, "Validity"=>Validity); aws_config=aws_config)
+create_license_version(ClientToken, ConsumptionConfiguration, Entitlements, HomeRegion, Issuer, LicenseArn, LicenseName, ProductName, Status, Validity, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateLicenseVersion", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("ClientToken"=>ClientToken, "ConsumptionConfiguration"=>ConsumptionConfiguration, "Entitlements"=>Entitlements, "HomeRegion"=>HomeRegion, "Issuer"=>Issuer, "LicenseArn"=>LicenseArn, "LicenseName"=>LicenseName, "ProductName"=>ProductName, "Status"=>Status, "Validity"=>Validity), args)); aws_config=aws_config)
+
+"""
+    CreateToken()
+
+Creates a long-lived token. A refresh token is a JWT token used to get an access token. With an access token, you can call AssumeRoleWithWebIdentity to get role credentials that you can use to call License Manager to manage the specified license.
+
+# Required Parameters
+- `ClientToken`: Idempotency token, valid for 10 minutes.
+- `LicenseArn`: Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the JWT token.
+
+# Optional Parameters
+- `ExpirationInDays`: Token expiration, in days, counted from token creation. The default is 365 days.
+- `RoleArns`: Amazon Resource Name (ARN) of the IAM roles to embed in the token. License Manager does not check whether the roles are in use.
+- `TokenProperties`: Data specified by the caller to be included in the JWT token. The data is mapped to the amr claim of the JWT token.
+"""
+create_token(ClientToken, LicenseArn; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateToken", Dict{String, Any}("ClientToken"=>ClientToken, "LicenseArn"=>LicenseArn); aws_config=aws_config)
+create_token(ClientToken, LicenseArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("CreateToken", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("ClientToken"=>ClientToken, "LicenseArn"=>LicenseArn), args)); aws_config=aws_config)
+
+"""
+    DeleteGrant()
+
+Deletes the specified grant.
+
+# Required Parameters
+- `GrantArn`: Amazon Resource Name (ARN) of the grant.
+- `Version`: Current version of the grant.
+
+"""
+delete_grant(GrantArn, Version; aws_config::AWSConfig=global_aws_config()) = license_manager("DeleteGrant", Dict{String, Any}("GrantArn"=>GrantArn, "Version"=>Version); aws_config=aws_config)
+delete_grant(GrantArn, Version, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("DeleteGrant", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("GrantArn"=>GrantArn, "Version"=>Version), args)); aws_config=aws_config)
+
+"""
+    DeleteLicense()
+
+Deletes the specified license.
+
+# Required Parameters
+- `LicenseArn`: Amazon Resource Name (ARN) of the license.
+- `SourceVersion`: Current version of the license.
+
+"""
+delete_license(LicenseArn, SourceVersion; aws_config::AWSConfig=global_aws_config()) = license_manager("DeleteLicense", Dict{String, Any}("LicenseArn"=>LicenseArn, "SourceVersion"=>SourceVersion); aws_config=aws_config)
+delete_license(LicenseArn, SourceVersion, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("DeleteLicense", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseArn"=>LicenseArn, "SourceVersion"=>SourceVersion), args)); aws_config=aws_config)
+
+"""
     DeleteLicenseConfiguration()
 
 Deletes the specified license configuration. You cannot delete a license configuration that is in use.
@@ -37,6 +225,74 @@ delete_license_configuration(LicenseConfigurationArn; aws_config::AWSConfig=glob
 delete_license_configuration(LicenseConfigurationArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("DeleteLicenseConfiguration", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseConfigurationArn"=>LicenseConfigurationArn), args)); aws_config=aws_config)
 
 """
+    DeleteToken()
+
+Deletes the specified token. Must be called in the license home Region.
+
+# Required Parameters
+- `TokenId`: Token ID.
+
+"""
+delete_token(TokenId; aws_config::AWSConfig=global_aws_config()) = license_manager("DeleteToken", Dict{String, Any}("TokenId"=>TokenId); aws_config=aws_config)
+delete_token(TokenId, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("DeleteToken", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("TokenId"=>TokenId), args)); aws_config=aws_config)
+
+"""
+    ExtendLicenseConsumption()
+
+Extends the expiration date for license consumption.
+
+# Required Parameters
+- `LicenseConsumptionToken`: License consumption token.
+
+# Optional Parameters
+- `DryRun`: Checks whether you have the required permissions for the action, without actually making the request. Provides an error response if you do not have the required permissions.
+"""
+extend_license_consumption(LicenseConsumptionToken; aws_config::AWSConfig=global_aws_config()) = license_manager("ExtendLicenseConsumption", Dict{String, Any}("LicenseConsumptionToken"=>LicenseConsumptionToken); aws_config=aws_config)
+extend_license_consumption(LicenseConsumptionToken, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ExtendLicenseConsumption", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseConsumptionToken"=>LicenseConsumptionToken), args)); aws_config=aws_config)
+
+"""
+    GetAccessToken()
+
+Gets a temporary access token to use with AssumeRoleWithWebIdentity. Access tokens are valid for one hour.
+
+# Required Parameters
+- `Token`: Refresh token, encoded as a JWT token.
+
+# Optional Parameters
+- `TokenProperties`: Token properties to validate against those present in the JWT token.
+"""
+get_access_token(Token; aws_config::AWSConfig=global_aws_config()) = license_manager("GetAccessToken", Dict{String, Any}("Token"=>Token); aws_config=aws_config)
+get_access_token(Token, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("GetAccessToken", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("Token"=>Token), args)); aws_config=aws_config)
+
+"""
+    GetGrant()
+
+Gets detailed information about the specified grant.
+
+# Required Parameters
+- `GrantArn`: Amazon Resource Name (ARN) of the grant.
+
+# Optional Parameters
+- `Version`: Grant version.
+"""
+get_grant(GrantArn; aws_config::AWSConfig=global_aws_config()) = license_manager("GetGrant", Dict{String, Any}("GrantArn"=>GrantArn); aws_config=aws_config)
+get_grant(GrantArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("GetGrant", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("GrantArn"=>GrantArn), args)); aws_config=aws_config)
+
+"""
+    GetLicense()
+
+Gets detailed information about the specified license.
+
+# Required Parameters
+- `LicenseArn`: Amazon Resource Name (ARN) of the license.
+
+# Optional Parameters
+- `Version`: License version.
+"""
+get_license(LicenseArn; aws_config::AWSConfig=global_aws_config()) = license_manager("GetLicense", Dict{String, Any}("LicenseArn"=>LicenseArn); aws_config=aws_config)
+get_license(LicenseArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("GetLicense", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseArn"=>LicenseArn), args)); aws_config=aws_config)
+
+"""
     GetLicenseConfiguration()
 
 Gets detailed information about the specified license configuration.
@@ -47,6 +303,18 @@ Gets detailed information about the specified license configuration.
 """
 get_license_configuration(LicenseConfigurationArn; aws_config::AWSConfig=global_aws_config()) = license_manager("GetLicenseConfiguration", Dict{String, Any}("LicenseConfigurationArn"=>LicenseConfigurationArn); aws_config=aws_config)
 get_license_configuration(LicenseConfigurationArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("GetLicenseConfiguration", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseConfigurationArn"=>LicenseConfigurationArn), args)); aws_config=aws_config)
+
+"""
+    GetLicenseUsage()
+
+Gets detailed information about the usage of the specified license.
+
+# Required Parameters
+- `LicenseArn`: Amazon Resource Name (ARN) of the license.
+
+"""
+get_license_usage(LicenseArn; aws_config::AWSConfig=global_aws_config()) = license_manager("GetLicenseUsage", Dict{String, Any}("LicenseArn"=>LicenseArn); aws_config=aws_config)
+get_license_usage(LicenseArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("GetLicenseUsage", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseArn"=>LicenseArn), args)); aws_config=aws_config)
 
 """
     GetServiceSettings()
@@ -71,6 +339,20 @@ Lists the resource associations for the specified license configuration. Resourc
 """
 list_associations_for_license_configuration(LicenseConfigurationArn; aws_config::AWSConfig=global_aws_config()) = license_manager("ListAssociationsForLicenseConfiguration", Dict{String, Any}("LicenseConfigurationArn"=>LicenseConfigurationArn); aws_config=aws_config)
 list_associations_for_license_configuration(LicenseConfigurationArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListAssociationsForLicenseConfiguration", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseConfigurationArn"=>LicenseConfigurationArn), args)); aws_config=aws_config)
+
+"""
+    ListDistributedGrants()
+
+Lists the grants distributed for the specified license.
+
+# Optional Parameters
+- `Filters`: Filters to scope the results. The following filters are supported:    LicenseARN     Status     PrincipalARN     ParentARN   
+- `GrantArns`: Amazon Resource Names (ARNs) of the grants.
+- `MaxResults`: Maximum number of results to return in a single call.
+- `NextToken`: Token for the next set of results.
+"""
+list_distributed_grants(; aws_config::AWSConfig=global_aws_config()) = license_manager("ListDistributedGrants"; aws_config=aws_config)
+list_distributed_grants(args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListDistributedGrants", args; aws_config=aws_config)
 
 """
     ListFailuresForLicenseConfigurationOperations()
@@ -117,6 +399,63 @@ list_license_specifications_for_resource(ResourceArn; aws_config::AWSConfig=glob
 list_license_specifications_for_resource(ResourceArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListLicenseSpecificationsForResource", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("ResourceArn"=>ResourceArn), args)); aws_config=aws_config)
 
 """
+    ListLicenseVersions()
+
+Lists all versions of the specified license.
+
+# Required Parameters
+- `LicenseArn`: Amazon Resource Name (ARN) of the license.
+
+# Optional Parameters
+- `MaxResults`: Maximum number of results to return in a single call.
+- `NextToken`: Token for the next set of results.
+"""
+list_license_versions(LicenseArn; aws_config::AWSConfig=global_aws_config()) = license_manager("ListLicenseVersions", Dict{String, Any}("LicenseArn"=>LicenseArn); aws_config=aws_config)
+list_license_versions(LicenseArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListLicenseVersions", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseArn"=>LicenseArn), args)); aws_config=aws_config)
+
+"""
+    ListLicenses()
+
+Lists the licenses for your account.
+
+# Optional Parameters
+- `Filters`: Filters to scope the results. The following filters are supported:    Beneficiary     ProductSKU     KeyFingerprint     Status   
+- `LicenseArns`: Amazon Resource Names (ARNs) of the licenses.
+- `MaxResults`: Maximum number of results to return in a single call.
+- `NextToken`: Token for the next set of results.
+"""
+list_licenses(; aws_config::AWSConfig=global_aws_config()) = license_manager("ListLicenses"; aws_config=aws_config)
+list_licenses(args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListLicenses", args; aws_config=aws_config)
+
+"""
+    ListReceivedGrants()
+
+Lists grants that are received but not accepted.
+
+# Optional Parameters
+- `Filters`: Filters to scope the results. The following filters are supported:    LicenseARN     Status   
+- `GrantArns`: Amazon Resource Names (ARNs) of the grants.
+- `MaxResults`: Maximum number of results to return in a single call.
+- `NextToken`: Token for the next set of results.
+"""
+list_received_grants(; aws_config::AWSConfig=global_aws_config()) = license_manager("ListReceivedGrants"; aws_config=aws_config)
+list_received_grants(args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListReceivedGrants", args; aws_config=aws_config)
+
+"""
+    ListReceivedLicenses()
+
+Lists received licenses.
+
+# Optional Parameters
+- `Filters`: Filters to scope the results. The following filters are supported:    ProductSKU     Status     KeyFingerprint     Issuer   
+- `LicenseArns`: Amazon Resource Names (ARNs) of the licenses.
+- `MaxResults`: Maximum number of results to return in a single call.
+- `NextToken`: Token for the next set of results.
+"""
+list_received_licenses(; aws_config::AWSConfig=global_aws_config()) = license_manager("ListReceivedLicenses"; aws_config=aws_config)
+list_received_licenses(args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListReceivedLicenses", args; aws_config=aws_config)
+
+"""
     ListResourceInventory()
 
 Lists resources managed using Systems Manager inventory.
@@ -142,6 +481,20 @@ list_tags_for_resource(ResourceArn; aws_config::AWSConfig=global_aws_config()) =
 list_tags_for_resource(ResourceArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListTagsForResource", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("ResourceArn"=>ResourceArn), args)); aws_config=aws_config)
 
 """
+    ListTokens()
+
+Lists your tokens.
+
+# Optional Parameters
+- `Filters`: Filters to scope the results. The following filter is supported:    licenseArns   
+- `MaxResults`: Maximum number of results to return in a single call.
+- `NextToken`: Token for the next set of results.
+- `TokenIds`: Token IDs.
+"""
+list_tokens(; aws_config::AWSConfig=global_aws_config()) = license_manager("ListTokens"; aws_config=aws_config)
+list_tokens(args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListTokens", args; aws_config=aws_config)
+
+"""
     ListUsageForLicenseConfiguration()
 
 Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.
@@ -156,6 +509,18 @@ Lists all license usage records for a license configuration, displaying license 
 """
 list_usage_for_license_configuration(LicenseConfigurationArn; aws_config::AWSConfig=global_aws_config()) = license_manager("ListUsageForLicenseConfiguration", Dict{String, Any}("LicenseConfigurationArn"=>LicenseConfigurationArn); aws_config=aws_config)
 list_usage_for_license_configuration(LicenseConfigurationArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("ListUsageForLicenseConfiguration", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("LicenseConfigurationArn"=>LicenseConfigurationArn), args)); aws_config=aws_config)
+
+"""
+    RejectGrant()
+
+Rejects the specified grant.
+
+# Required Parameters
+- `GrantArn`: Amazon Resource Name (ARN) of the grant.
+
+"""
+reject_grant(GrantArn; aws_config::AWSConfig=global_aws_config()) = license_manager("RejectGrant", Dict{String, Any}("GrantArn"=>GrantArn); aws_config=aws_config)
+reject_grant(GrantArn, args::AbstractDict{String, <:Any}; aws_config::AWSConfig=global_aws_config()) = license_manager("RejectGrant", Dict{String, Any}(mergewith(_merge, Dict{String, Any}("GrantArn"=>GrantArn), args)); aws_config=aws_config)
 
 """
     TagResource()
